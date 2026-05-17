@@ -742,3 +742,10 @@ class PasswordPassphraseTests(ClientTest):
             password="television",
             passphrase="wat? lol no",
         )
+
+
+class TestExecCommandWithoutConnection(unittest.TestCase):
+    def test_exec_command_raises_ssh_exception_when_not_connected(self):
+        client = SSHClient()
+        with pytest.raises(SSHException):
+            client.exec_command("ls")
